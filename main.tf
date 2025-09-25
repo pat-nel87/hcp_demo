@@ -44,12 +44,6 @@ module "demo_vnet" {
   }
 }
 
-# Optional: Output the VNet info
-output "vnet_info" {
-  value = {
-    id         = module.demo_vnet.vnet_id
-    subnet_ids = module.demo_vnet.subnet_ids
-  }
 }
 
 # Create a storage account
