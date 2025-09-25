@@ -24,6 +24,34 @@ resource "azurerm_resource_group" "main" {
   }
 }
 
+module "demo_vnet" {
+  source  = "app.terraform.io/pat-test-org/vnet/test"
+  version = "1.0.0"
+  
+  vnet_name           = "vnet-demo"
+  resource_group_name = azurerm_resource_group.main.name
+  location            = azurerm_resource_group.main.location
+  
+  subnets = {
+    "web"    = "10.0.1.0/24"
+    "app"    = "10.0.2.0/24"
+    "data"   = "10.0.3.0/24"
+  }
+  
+  tags = {
+    environment = "demo"
+    module      = "simple-vnet"
+  }
+}
+
+# Optional: Output the VNet info
+output "vnet_info" {
+  value = {
+    id         = module.demo_vnet.vnet_id
+    subnet_ids = module.demo_vnet.subnet_ids
+  }
+}
+
 # Create a storage account
 resource "azurerm_storage_account" "main" {
   name                     = "sttftrialunique${random_string.suffix.result}"
