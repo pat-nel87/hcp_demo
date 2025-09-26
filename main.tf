@@ -5,6 +5,10 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "~>3.0"
     }
+    random = {
+      source  = "hashicorp/random"
+      version = "~>3.1"
+    }
   }
 }
 
@@ -42,8 +46,6 @@ module "demo_vnet" {
     environment = "demo"
     module      = "simple-vnet"
   }
-}
-
 }
 
 # Create a storage account
