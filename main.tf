@@ -26,7 +26,7 @@ resource "azurerm_resource_group" "main" {
 
 module "demo_vnet" {
   source  = "app.terraform.io/pat-test-org/vnet/test"
-  version = "1.0.0"
+  version = "1.0.1"
   
   vnet_name           = "vnet-demo"
   resource_group_name = azurerm_resource_group.main.name
